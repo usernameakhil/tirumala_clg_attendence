@@ -4,7 +4,7 @@ A complete 3-tier attendance tracking system built with **React**, **Tailwind CS
 
 ---
 
-## 🏛️ System Architecture & Access URLs
+##  System Architecture & Access URLs
 
 | Portal | URL Path | Credentials / Access | Description |
 | :--- | :--- | :--- | :--- |
@@ -14,7 +14,7 @@ A complete 3-tier attendance tracking system built with **React**, **Tailwind CS
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Student Portal**:
   - Roll number lookup (no password required).
@@ -44,7 +44,7 @@ A complete 3-tier attendance tracking system built with **React**, **Tailwind CS
 
 ---
 
-## 🚀 Quick Start
+## 🚀Quick Start
 
 ### 1. Install Dependencies
 ```bash
