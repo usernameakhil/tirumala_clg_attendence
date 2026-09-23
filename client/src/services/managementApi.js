@@ -1,5 +1,5 @@
 // Management API service — only used from the admin panel
-const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+const BACKEND_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app') ? 'https://tirumala-clg-attendence.onrender.com' : '');
 const API_BASE = `${BACKEND_URL.replace(/\/$/, '')}/api/management`;
 
 async function handleResponse(res) {
