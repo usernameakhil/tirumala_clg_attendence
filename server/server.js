@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -43,8 +44,17 @@ app.get(['/ping', '/api/ping'], (req, res) => {
   });
 });
 
-// Root
-app.get('/', (req, res) => {
+// Static files (serve built React client in production if available)
+const clientDistPath = path.join(__dirname, '../client/dist');
+const fs = require('fs');
+
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  console.log(`📁 Serving frontend static files from: ${clientDistPath}`);
+}
+
+// Root API response (if not serving client HTML)
+app.get('/api', (req, res) => {
   res.status(200).json({
     service: 'Attendance Tracker API',
     status: 'online'
@@ -70,9 +80,19 @@ app.post('/api/seed/reset', async (req, res) => {
   }
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: 'Route not found' });
+// Client SPA fallback: for any non-API route, send index.html if dist exists
+if (fs.existsSync(clientDistPath)) {
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
+
+// API 404 handler
+app.use('/api', (req, res) => {
+  res.status(404).json({ success: false, message: 'API route not found' });
 });
 
 // Error handler

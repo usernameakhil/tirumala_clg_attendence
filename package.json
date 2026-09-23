@@ -1,13 +1,13 @@
 {
   "name": "attendencetracker",
   "version": "1.0.0",
-  "description": "College Attendance Tracker with Teacher and Student sides",
+  "description": "College Attendance Tracker with Teacher, Student, and Management sides",
   "scripts": {
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "dev": "npx concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd client && npm run build",
-    "start": "cd server && npm start"
+    "build": "npm --prefix client install && npm --prefix client run build && npm --prefix server install",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "concurrently": "^9.1.2"
