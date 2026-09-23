@@ -1,6 +1,6 @@
 // Client API service communicating with the Express backend
-
-const API_BASE = '/api';
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE = `${BACKEND_URL.replace(/\/$/, '')}/api`;
 
 async function handleResponse(res) {
   const data = await res.json().catch(() => ({}));

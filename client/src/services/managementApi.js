@@ -1,5 +1,6 @@
 // Management API service — only used from the admin panel
-const API_BASE = '/api/management';
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE = `${BACKEND_URL.replace(/\/$/, '')}/api/management`;
 
 async function handleResponse(res) {
   const data = await res.json().catch(() => ({}));
